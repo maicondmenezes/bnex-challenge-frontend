@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Product Maneagement{% endblock title %}</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'api_client/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav>
+            <ul>
+                <li><a>Home</a></li>
+                <li><a href="{% url 'manage_api_connections' %}">Manage API Connections</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Main content block -->
+        {% block content %}
+        <!-- Content overridden in child templates -->
+        {% endblock content %}
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        <p>© 2024 @maicondmenezes</p>
+    </footer>
+
+    <!-- JavaScript files here -->
+</body>
+</html>

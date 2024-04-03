@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage API Connections</h2>
+
+<!-- Form for creating a new API connection -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="create">Create</button>
+</form>
+
+<hr>
+
+{% for api in api_connections %}
+    <div>
+        <strong>{{ api.name }}</strong> - {{ api.base_url }}
+        <form method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="api_id" value="{{ api.id }}">
+            <!-- Edit Button -->
+            <button type="button" onclick="location.href='{% url 'edit_api_connection' api.id %}'">Edit</button>
+            <button type="submit" name="test_connection">Test Connection</button>
+            <button type="submit" name="set_active" {% if api.active %}disabled{% endif %}>Set Active</button>
+            <button type="submit" name="delete">Delete</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}

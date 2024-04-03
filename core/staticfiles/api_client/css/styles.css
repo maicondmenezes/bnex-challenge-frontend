@@ -1,0 +1,10 @@
+.bullet {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.bullet-gray { background-color: gray; }
+.bullet-green { background-color: green; }
+.bullet-red { background-color: red; }

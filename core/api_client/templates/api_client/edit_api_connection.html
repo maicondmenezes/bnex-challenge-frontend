@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit API {{ api_client_name }} Connection</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="update">Update</button>
+</form>
+<a href="{% url 'manage_api_connections' %}">Cancel</a>
+
+<!-- Test Connection Section -->
+<div id="testConnectionSection">
+    <button type="button" id="testConnectionButton">Test Connection</button>
+    <span id="connectionStatusBullet" class="bullet bullet-gray"></span>
+    <span id="connectionStatusLabel">Not Tested</span>
+</div>
+
+<script>
+    document.getElementById('testConnectionButton').addEventListener('click', function() {
+        var apiUrl = "{% url 'test_api_connection' api_connection.id %}"; // URL to your test connection view
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                var bullet = document.getElementById('connectionStatusBullet');
+                var label = document.getElementById('connectionStatusLabel');
+                if (data.success) {
+                    bullet.className = 'bullet bullet-green';
+                    label.textContent = 'Connection Successful';
+                } else {
+                    bullet.className = 'bullet bullet-red';
+                    label.textContent = data.error || 'Connection Failed';
+                }
+            });
+    });
+</script>
+
+{% endblock %}
